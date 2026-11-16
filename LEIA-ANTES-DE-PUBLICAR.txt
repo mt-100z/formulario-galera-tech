@@ -1,0 +1,20 @@
+GALERA TECH — NOTAS PARA A ORGANIZAÇÃO
+
+O aviso de privacidade foi reformatado e recebeu os dados informados da APETI:
+Razão social: APETI - ASSOCIAÇÃO DOS PROFISSIONAIS E EMPRESAS DE TECNOLOGIA DA INFORMAÇÃO
+CNPJ: 05.862.861/0001-00
+
+ANTES DE COLETAR DADOS REAIS:
+1. Confirmar com a APETI o responsável/controlador do tratamento, o canal para direitos LGPD e os procedimentos de resposta.
+2. Definir prazo e critérios de retenção, compartilhamentos efetivos, base(s) legal(is) aplicável(is) e procedimentos relativos aos menores de idade.
+3. Revisar o texto institucionalmente/juridicamente, testar autenticação do admin, HTTPS e proteções de banco de dados.
+4. O aviso público não usa os rótulos "minuta" ou "versão preliminar"; isso não significa que a revisão institucional tenha sido concluída.
+
+PROJETO:
+- Mobile-first: campos e controles maiores, navegação vertical no celular.
+- Desktop: formulário centralizado com duas colunas quando apropriado.
+- CSS do formulário: assets/formulario.css
+- CSS privacidade: assets/privacidade.css
+- CSS administrativo: assets/style.css (intacto)
+- Consulta CEP: assets/consulta-cep.js
+- PHP/SQL: sem alterações no processamento e armazenamento.

@@ -1,0 +1,18 @@
+GALERA TECH — VERSÃO CLARA FINAL
+
+O formulário usa apenas o tema CLARO, independentemente do tema do Windows/navegador.
+Aparência: assets/formulario.css
+Fundo: degradês discretos em CSS; nenhuma imagem de fundo ou logo no formulário.
+
+Mantidos: 5 etapas em PHP, botões animados, consulta ViaCEP na etapa de endereço, salvamento MySQL.
+A consulta automática de CEP precisa de conexão com a internet.
+
+Painel administrativo usa assets/style.css e não foi alterado.
+Página sucesso usa assets/sucesso.css e não foi alterada.
+
+INSTALAÇÃO
+1. Salve backup da pasta atual.
+2. Extraia esta pasta no diretório servido pelo PHP (ex: xampp/htdocs).
+3. Abra o projeto via servidor PHP, e não pelo arquivo local.
+4. Ctrl+F5 para atualizar.
+5. Verifique as credenciais em config.php e teste uma inscrição fictícia.

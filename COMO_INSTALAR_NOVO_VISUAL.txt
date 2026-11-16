@@ -1,0 +1,15 @@
+GALERA TECH - NOVO VISUAL DO FORMULARIO
+
+1. Faca backup da pasta antiga.
+2. Extraia a pasta galera-tech-backend-final deste ZIP no local servido pelo seu PHP.
+3. Verifique se assets/style.css, assets/img/fundodesk.webp e assets/img/fundomob.webp estao presentes.
+4. Abra a URL real do formulario no navegador e use Ctrl+F5.
+
+ARQUIVOS ATUALIZADOS:
+- index.php: cabecalho centralizado, estrutura do painel e avisos recolhiveis.
+- assets/style.css: visual responsive desktop/mobile.
+- assets/img/fundodesk.webp: fundo escuro atualizado.
+- assets/img/fundomob.webp: fundo mobile levemente escurecido.
+
+O restante dos arquivos PHP e SQL permanece como no projeto anterior.
+Atenção: testar a gravacao em seu MySQL local com dados ficticios.

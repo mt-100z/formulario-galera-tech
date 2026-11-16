@@ -1,0 +1,19 @@
+GALERA TECH - CONSULTA DE CEP (VIA CEP)
+
+Na Etapa 2 (Endereco), informe um CEP com 8 numeros.
+O navegador consulta https://viacep.com.br/ws/XXXXXXXX/json/
+Rua, bairro, cidade e UF sao preenchidos automaticamente quando o CEP e encontrado.
+Numero e complemento devem ser preenchidos manualmente.
+Se o CEP nao for encontrado, a internet falhar ou a API estiver indisponivel, os campos ficam editaveis para preenchimento manual.
+
+Arquivos alterados apenas nesta entrega:
+- index.php (mensagem de status e inclusao condicional de script na etapa 2)
+- assets/formulario.css (estilo da mensagem, para claro e escuro)
+- assets/consulta-cep.js (novo: unica finalidade e consulta ao CEP)
+
+Nao alterados: admin/, assets/style.css, etapas.php, salvar_inscricao.php, config.php, SQL, sucesso.php.
+
+Para testar: execute o projeto num servidor PHP e abra a etapa 2. Um CEP de teste valido e 01001-000 (Praca da Se, Sao Paulo/SP).
+O script de CEP e carregado apenas na etapa 2. A navegacao entre etapas continua em PHP.
+Nao e necessario chave de API.
+Nao coloque dados reais de alunos em testes.
