@@ -1,0 +1,4 @@
+O formulario de inscricao usa assets/formulario.css.
+O painel administrativo continua usando assets/style.css (original).
+Os arquivos da pasta admin/ foram preservados exatamente como no ZIP original enviado.
+Para trocar somente o visual do formulario, altere assets/formulario.css.

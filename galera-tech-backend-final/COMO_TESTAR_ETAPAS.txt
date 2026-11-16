@@ -1,0 +1,28 @@
+GALERA TECH — FORMULÁRIO EM 5 ETAPAS (PHP + HTML + CSS)
+
+O QUE FOI ALTERADO
+- index.php: exibe apenas a seção atual; barra de progresso; Continuar e Voltar; preserva valores dos campos.
+- etapas.php: arquivo NOVO que controla a navegação e valida cada etapa; dados em sessão PHP.
+- salvar_inscricao.php: recupera os dados da sessão com verificação de conclusão; mantém o SQL original e validações finais.
+- assets/style.css: aparência mais moderna e responsiva para celular e computador.
+- assets/validacoes.js: preservado, mas NÃO carregado no novo index.php (você pediu HTML/CSS/PHP sem JS).
+- config.php, SQL, páginas admin e demais arquivos: preservados.
+
+INSTALAÇÃO (XAMPP / LARAGON)
+1. Faça um backup da pasta antiga.
+2. Extraia o conteúdo do ZIP para C:\xampp\htdocs\ (ou a pasta www do Laragon).
+3. Confirme que a pasta é ...\galera-tech-backend-final\, com index.php e etapas.php juntos.
+4. Abra http://localhost/galera-tech-backend-final/index.php (não abra com duplo clique no arquivo).
+5. Pressione Ctrl+F5. A aba do navegador deve mostrar 'Galera Tech | Inscrição por etapas'.
+6. A primeira página deve dizer 'Etapa 1 de 5'; complete com DADOS FICTÍCIOS VÁLIDOS.
+7. Teste Continuar, Voltar, retenção dos valores e chegada à etapa 5.
+8. Finalize somente em ambiente local com o MySQL configurado.
+
+IMPORTANTE
+- O novo arquivo etapas.php precisa ficar na MESMA pasta que index.php.
+- O banco de dados deve estar configurado conforme seu config.php original.
+- O fluxo foi testado até a etapa 5 com um servidor PHP; a gravação no banco real NÃO foi testada neste ambiente.
+- Não publicar dados reais até revisar segurança, política de privacidade e permissões de administração.
+- Remova admin/criar_admin.php depois de cadastrar o primeiro admin (conforme LEIA-ME original).
+- Este projeto não usa JavaScript para navegar entre as etapas.
+- As imagens decorativas personalizadas ainda podem ser adicionadas depois no style.css.

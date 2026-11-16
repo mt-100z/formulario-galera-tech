@@ -1,0 +1,98 @@
+<?php require_once __DIR__."/config.php"; require_once __DIR__."/etapas.php"; ?>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Galera Tech | Inscrição por etapas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/formulario.css?v=20261116-mobile-v3">
+</head>
+<body>
+<header class="cabecalho">
+  <div class="container">
+    <h1 class="titulo-principal">
+      <svg class="icone-formatura" viewBox="0 0 48 48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 17 24 8l20 9-20 9L4 17Z" stroke="currentColor" stroke-width="3.4" stroke-linejoin="round"/>
+        <path d="M12 23v10c8 6 16 6 24 0V23M44 17v14" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Inscrição de Estudante</span>
+    </h1>
+    <p class="subtitulo">Preencha seus dados para realizar sua inscrição.</p>
+  </div>
+</header>
+<main class="container py-4">
+ <div id="mensagemSucesso" class="alert alert-success d-none" role="status" tabindex="-1"></div>
+ <form id="formInscricao" method="post" action="<?= $etapa === 5 ? 'salvar_inscricao.php' : 'index.php' ?>"><input type="hidden" name="csrf" value="<?= e(token()) ?>">
+  <?php if ($erroEtapa !== ''): ?>
+    <div class="alert alert-danger" role="alert"><?= e($erroEtapa) ?></div>
+  <?php endif; ?>
+  <div class="progresso-inscricao mb-3" aria-label="Progresso da inscrição">
+    <div class="d-flex justify-content-between align-items-center mb-2"><strong>Etapa <?= $etapa ?> de 5</strong><span><?= $etapa * 20 ?>% concluído</span></div>
+    <div class="progress" role="progressbar" aria-valuenow="<?= $etapa * 20 ?>" aria-valuemin="0" aria-valuemax="100">
+      <div class="progress-bar" style="width: <?= $etapa * 20 ?>%"></div>
+    </div>
+  </div>
+  <?php if ($etapa === 1): ?>
+  <section class="card secao"><div class="card-header"><h2 class="h5 mb-0"><span class="numero">1</span>Dados pessoais do estudante</h2></div><div class="card-body"><div class="row g-3">
+   <div class="col-md-8"><label for="nome" class="form-label">Nome completo <span class="obrigatorio">*</span></label><input class="form-control" id="nome" name="nome" autocomplete="name" maxlength="150" required value="<?= e((string)($dadosEtapas['nome'] ?? '')) ?>"><div class="invalid-feedback">Informe o nome completo.</div></div>
+   <div class="col-md-4"><label for="nascimento" class="form-label">Data de nascimento <span class="obrigatorio">*</span></label><input type="date" class="form-control" id="nascimento" name="data_nascimento" required value="<?= e((string)($dadosEtapas['data_nascimento'] ?? '')) ?>"><div class="invalid-feedback">Informe uma data de nascimento válida.</div></div>
+   <div class="col-md-6"><label for="cpf" class="form-label">CPF <span class="obrigatorio">*</span></label><input class="form-control" id="cpf" name="cpf" inputmode="numeric" placeholder="000.000.000-00" maxlength="14" required value="<?= e((string)($dadosEtapas['cpf'] ?? '')) ?>"><div class="invalid-feedback">Informe um CPF válido.</div></div>
+   <div class="col-md-6"><label for="rg" class="form-label">RG / Documento de identidade <span class="obrigatorio">*</span></label><input class="form-control" id="rg" name="rg" maxlength="30" required value="<?= e((string)($dadosEtapas['rg'] ?? '')) ?>"><div class="invalid-feedback">Informe o documento de identidade.</div></div>
+   <div class="col-md-4"><label for="sexo" class="form-label">Sexo <span class="obrigatorio">*</span></label><select class="form-select" id="sexo" name="sexo" required><option value=""<?= (($dadosEtapas['sexo'] ?? '') === '') ? ' selected' : '' ?>>Selecione</option><option<?= (($dadosEtapas['sexo'] ?? '') === 'Masculino') ? ' selected' : '' ?>>Masculino</option><option<?= (($dadosEtapas['sexo'] ?? '') === 'Feminino') ? ' selected' : '' ?>>Feminino</option><option<?= (($dadosEtapas['sexo'] ?? '') === 'Não desejo informar') ? ' selected' : '' ?>>Não desejo informar</option></select><div class="invalid-feedback">Selecione uma opção.</div></div>
+   <div class="col-md-4"><label for="email" class="form-label">E-mail <span class="obrigatorio">*</span></label><input type="email" class="form-control" id="email" name="email" maxlength="150" autocomplete="email" required value="<?= e((string)($dadosEtapas['email'] ?? '')) ?>"><div class="invalid-feedback">Informe um e-mail válido.</div></div>
+   <div class="col-md-4"><label for="telefone" class="form-label">WhatsApp do estudante (com DDD) <span class="obrigatorio">*</span></label><input type="tel" class="form-control" id="telefone" name="telefone" placeholder="(17) 99999-9999" maxlength="15" inputmode="numeric" required value="<?= e((string)($dadosEtapas['telefone'] ?? '')) ?>"><div class="invalid-feedback">Informe um celular com DDD (11 dígitos).</div></div>
+  </div></div></section>
+  <?php endif; ?>
+  <?php if ($etapa === 2): ?>
+  <section class="card secao"><div class="card-header"><h2 class="h5 mb-0"><span class="numero">2</span>Residência e endereço</h2></div><div class="card-body"><div class="row g-3">
+    <div class="col-12"><label for="resideRioPreto" class="form-label">Você reside em São José do Rio Preto? <span class="obrigatorio">*</span></label><select id="resideRioPreto" name="reside_rio_preto" class="form-select" required><option value=""<?= (($dadosEtapas['reside_rio_preto'] ?? '') === '') ? ' selected' : '' ?>>Selecione</option><option value="sim"<?= (($dadosEtapas['reside_rio_preto'] ?? '') === 'sim') ? ' selected' : '' ?>>Sim</option><option value="nao"<?= (($dadosEtapas['reside_rio_preto'] ?? '') === 'nao') ? ' selected' : '' ?>>Não</option></select><div class="invalid-feedback">Informe se reside em São José do Rio Preto.</div></div>
+   <div class="col-md-3"><label for="cep" class="form-label">CEP <span class="obrigatorio">*</span></label><input class="form-control" id="cep" name="cep" placeholder="00000-000" maxlength="9" inputmode="numeric" autocomplete="postal-code" aria-describedby="cep-status" required value="<?= e((string)($dadosEtapas['cep'] ?? '')) ?>"><div class="invalid-feedback">Informe um CEP com 8 dígitos.</div><div id="cep-status" class="cep-status" role="status" aria-live="polite">Informe o CEP para buscar o endereço automaticamente.</div></div>
+   <div class="col-md-7"><label for="logradouro" class="form-label">Logradouro <span class="obrigatorio">*</span></label><input class="form-control" id="logradouro" name="logradouro" maxlength="150" placeholder="Rua, avenida..." required value="<?= e((string)($dadosEtapas['logradouro'] ?? '')) ?>"><div class="invalid-feedback">Informe o logradouro.</div></div>
+   <div class="col-md-2"><label for="numero" class="form-label">Número <span class="obrigatorio">*</span></label><input class="form-control" id="numero" name="numero" maxlength="15" required value="<?= e((string)($dadosEtapas['numero'] ?? '')) ?>"><div class="invalid-feedback">Informe o número ou S/N.</div></div>
+   <div class="col-md-5"><label for="complemento" class="form-label">Complemento</label><input class="form-control" id="complemento" name="complemento" maxlength="100" value="<?= e((string)($dadosEtapas['complemento'] ?? '')) ?>"></div>
+   <div class="col-md-4"><label for="bairro" class="form-label">Bairro <span class="obrigatorio">*</span></label><input class="form-control" id="bairro" name="bairro" maxlength="100" required value="<?= e((string)($dadosEtapas['bairro'] ?? '')) ?>"><div class="invalid-feedback">Informe o bairro.</div></div>
+   <div class="col-md-5"><label for="cidade" class="form-label">Cidade <span class="obrigatorio">*</span></label><input class="form-control" id="cidade" name="cidade" maxlength="100" required value="<?= e((string)($dadosEtapas['cidade'] ?? '')) ?>"><div class="invalid-feedback">Informe a cidade.</div></div>
+  <div class="col-md-3"><label for="estado" class="form-label">Estado (UF) <span class="obrigatorio">*</span></label><select class="form-select" id="estado" name="estado" required><option value=""<?= (($dadosEtapas['estado'] ?? '') === '') ? ' selected' : '' ?>>Selecione</option><option value="AC"<?= (($dadosEtapas['estado'] ?? '') === 'AC') ? ' selected' : '' ?>>Acre (AC)</option><option value="AL"<?= (($dadosEtapas['estado'] ?? '') === 'AL') ? ' selected' : '' ?>>Alagoas (AL)</option><option value="AP"<?= (($dadosEtapas['estado'] ?? '') === 'AP') ? ' selected' : '' ?>>Amapá (AP)</option><option value="AM"<?= (($dadosEtapas['estado'] ?? '') === 'AM') ? ' selected' : '' ?>>Amazonas (AM)</option><option value="BA"<?= (($dadosEtapas['estado'] ?? '') === 'BA') ? ' selected' : '' ?>>Bahia (BA)</option><option value="CE"<?= (($dadosEtapas['estado'] ?? '') === 'CE') ? ' selected' : '' ?>>Ceará (CE)</option><option value="DF"<?= (($dadosEtapas['estado'] ?? '') === 'DF') ? ' selected' : '' ?>>Distrito Federal (DF)</option><option value="ES"<?= (($dadosEtapas['estado'] ?? '') === 'ES') ? ' selected' : '' ?>>Espírito Santo (ES)</option><option value="GO"<?= (($dadosEtapas['estado'] ?? '') === 'GO') ? ' selected' : '' ?>>Goiás (GO)</option><option value="MA"<?= (($dadosEtapas['estado'] ?? '') === 'MA') ? ' selected' : '' ?>>Maranhão (MA)</option><option value="MT"<?= (($dadosEtapas['estado'] ?? '') === 'MT') ? ' selected' : '' ?>>Mato Grosso (MT)</option><option value="MS"<?= (($dadosEtapas['estado'] ?? '') === 'MS') ? ' selected' : '' ?>>Mato Grosso do Sul (MS)</option><option value="MG"<?= (($dadosEtapas['estado'] ?? '') === 'MG') ? ' selected' : '' ?>>Minas Gerais (MG)</option><option value="PA"<?= (($dadosEtapas['estado'] ?? '') === 'PA') ? ' selected' : '' ?>>Pará (PA)</option><option value="PB"<?= (($dadosEtapas['estado'] ?? '') === 'PB') ? ' selected' : '' ?>>Paraíba (PB)</option><option value="PR"<?= (($dadosEtapas['estado'] ?? '') === 'PR') ? ' selected' : '' ?>>Paraná (PR)</option><option value="PE"<?= (($dadosEtapas['estado'] ?? '') === 'PE') ? ' selected' : '' ?>>Pernambuco (PE)</option><option value="PI"<?= (($dadosEtapas['estado'] ?? '') === 'PI') ? ' selected' : '' ?>>Piauí (PI)</option><option value="RJ"<?= (($dadosEtapas['estado'] ?? '') === 'RJ') ? ' selected' : '' ?>>Rio de Janeiro (RJ)</option><option value="RN"<?= (($dadosEtapas['estado'] ?? '') === 'RN') ? ' selected' : '' ?>>Rio Grande do Norte (RN)</option><option value="RS"<?= (($dadosEtapas['estado'] ?? '') === 'RS') ? ' selected' : '' ?>>Rio Grande do Sul (RS)</option><option value="RO"<?= (($dadosEtapas['estado'] ?? '') === 'RO') ? ' selected' : '' ?>>Rondônia (RO)</option><option value="RR"<?= (($dadosEtapas['estado'] ?? '') === 'RR') ? ' selected' : '' ?>>Roraima (RR)</option><option value="SC"<?= (($dadosEtapas['estado'] ?? '') === 'SC') ? ' selected' : '' ?>>Santa Catarina (SC)</option><option value="SP"<?= (($dadosEtapas['estado'] ?? '') === 'SP') ? ' selected' : '' ?>>São Paulo (SP)</option><option value="SE"<?= (($dadosEtapas['estado'] ?? '') === 'SE') ? ' selected' : '' ?>>Sergipe (SE)</option><option value="TO"<?= (($dadosEtapas['estado'] ?? '') === 'TO') ? ' selected' : '' ?>>Tocantins (TO)</option></select><div class="invalid-feedback">Selecione o estado.</div></div></div></div></section>
+  <?php endif; ?>
+  <?php if ($etapa === 3): ?>
+  <section class="card secao"><div class="card-header"><h2 class="h5 mb-0"><span class="numero">3</span>Informações escolares</h2></div><div class="card-body"><div class="row g-3">
+    <div class="col-md-8"><label for="escola" class="form-label">Nome completo da escola de origem <span class="obrigatorio">*</span></label><input type="text" class="form-control" id="escola" name="nome_escola" maxlength="150" placeholder="Digite o nome da escola" required value="<?= e((string)($dadosEtapas['nome_escola'] ?? '')) ?>"><div class="invalid-feedback">Informe o nome da escola.</div></div>
+    <div class="col-md-6"><label for="serie" class="form-label">Série / ano escolar <span class="obrigatorio">*</span></label><input type="text" class="form-control" id="serie" name="serie_escolar" placeholder="Ex.: 2º ano do Ensino Médio" maxlength="80" required value="<?= e((string)($dadosEtapas['serie_escolar'] ?? '')) ?>"><div class="invalid-feedback">Informe a série ou ano escolar.</div></div>
+    <div class="col-md-6"><label for="origemDivulgacao" class="form-label">Por onde conheceu o Galera Tech? <span class="obrigatorio">*</span></label><select class="form-select" id="origemDivulgacao" name="origem_divulgacao" required><option value=""<?= (($dadosEtapas['origem_divulgacao'] ?? '') === '') ? ' selected' : '' ?>>Selecione</option><option<?= (($dadosEtapas['origem_divulgacao'] ?? '') === 'Instagram / Redes sociais') ? ' selected' : '' ?>>Instagram / Redes sociais</option><option<?= (($dadosEtapas['origem_divulgacao'] ?? '') === 'Escola (Diretoria / Professores)') ? ' selected' : '' ?>>Escola (Diretoria / Professores)</option><option<?= (($dadosEtapas['origem_divulgacao'] ?? '') === 'Amigos ou familiares') ? ' selected' : '' ?>>Amigos ou familiares</option><option<?= (($dadosEtapas['origem_divulgacao'] ?? '') === 'Anúncio no rádio ou TV') ? ' selected' : '' ?>>Anúncio no rádio ou TV</option><option<?= (($dadosEtapas['origem_divulgacao'] ?? '') === 'Outros') ? ' selected' : '' ?>>Outros</option></select><div class="invalid-feedback">Selecione como conheceu o projeto.</div></div>
+  </div><div class="alert alert-primary mt-3 mb-0" role="note" id="informacaoTransporte"><strong>Transporte e deslocamento:</strong> o auxílio-transporte (cartão Circular Santa Luzia), quando disponibilizado pelo programa, é destinado aos estudantes matriculados em escolas do município de São José do Rio Preto. Para residentes de outras cidades, os custos e a logística de deslocamento às atividades presenciais ficam sob responsabilidade do candidato ou responsável.</div><p class="small text-secondary mt-3 mb-0">O Galera Tech ocorre à tarde. O ano e o semestre da inscrição serão definidos pelo sistema, não pelo candidato.</p></div></section>
+  <?php endif; ?>
+  <?php if ($etapa === 4): ?>
+  <section class="card secao"><div class="card-header"><h2 class="h5 mb-0"><span class="numero">4</span>Dados do responsável</h2></div><div class="card-body"><p class="small text-secondary" id="ajudaResponsavel">Nome, WhatsApp e parentesco são obrigatórios para estudantes menores de 18 anos e opcionais para maiores.</p><div class="row g-3">
+    <div class="col-md-7"><label for="responsavelNome" class="form-label">Nome completo do responsável <span class="obrigatorio" id="asteriscoResponsavel">*</span></label><input class="form-control responsavel" id="responsavelNome" name="responsavel_nome" maxlength="150" autocomplete="off" value="<?= e((string)($dadosEtapas['responsavel_nome'] ?? '')) ?>"><div class="invalid-feedback">Informe o nome do responsável.</div></div>
+    <div class="col-md-5"><label for="parentesco" class="form-label">Grau de parentesco com o estudante <span class="obrigatorio" id="asteriscoParentesco">*</span></label><select class="form-select responsavel" id="parentesco" name="parentesco"><option value=""<?= (($dadosEtapas['parentesco'] ?? '') === '') ? ' selected' : '' ?>>Selecione o grau de parentesco</option><option value="Mãe"<?= (($dadosEtapas['parentesco'] ?? '') === 'Mãe') ? ' selected' : '' ?>>Mãe</option><option value="Pai"<?= (($dadosEtapas['parentesco'] ?? '') === 'Pai') ? ' selected' : '' ?>>Pai</option><option value="Tutor(a) / Responsável legal"<?= (($dadosEtapas['parentesco'] ?? '') === 'Tutor(a) / Responsável legal') ? ' selected' : '' ?>>Tutor(a) / Responsável legal</option><option value="Outro"<?= (($dadosEtapas['parentesco'] ?? '') === 'Outro') ? ' selected' : '' ?>>Outro</option></select><div class="invalid-feedback">Selecione o parentesco.</div></div>
+    <div class="col-md-5"><label for="responsavelTelefone" class="form-label">WhatsApp do responsável (com DDD) <span class="obrigatorio" id="asteriscoTelefoneResponsavel">*</span></label><input type="tel" class="form-control responsavel" id="responsavelTelefone" name="responsavel_telefone" maxlength="15" inputmode="numeric" placeholder="(17) 99999-9999" value="<?= e((string)($dadosEtapas['responsavel_telefone'] ?? '')) ?>"><div class="invalid-feedback">Informe um WhatsApp com DDD (11 dígitos).</div></div>
+   </div></div></section>
+  <?php endif; ?>
+  <?php if ($etapa === 5): ?>
+  <section class="card secao"><div class="card-header"><h2 class="h5 mb-0"><span class="numero">5</span>Declarações e confirmação</h2></div><div class="card-body">
+   <div class="form-check mb-3"><input class="form-check-input" type="checkbox" id="cienciaPrograma" name="ciencia_programa" required><label class="form-check-label" for="cienciaPrograma"><strong>Li e compreendi as condições do Galera Tech:</strong> a capacitação é gratuita, presencial no período da tarde e <strong>exclusiva para estudantes do Ensino Médio de escolas públicas</strong>. <span class="obrigatorio">*</span></label><div class="invalid-feedback">Confirme que leu e compreendeu as condições de participação.</div></div>
+   <div class="form-check mb-3"><input class="form-check-input" type="checkbox" id="cienciaTransporte" name="ciencia_transporte" required><label class="form-check-label" for="cienciaTransporte"><strong>Li e compreendi as condições de transporte e deslocamento</strong> descritas acima, incluindo as regras do auxílio-transporte e a responsabilidade pelos custos e pela logística de deslocamento quando aplicável. <span class="obrigatorio">*</span></label><div class="invalid-feedback">Confirme a ciência das condições de transporte e deslocamento.</div></div>
+   <div class="form-check mb-3"><input class="form-check-input" type="checkbox" id="veracidade" name="declarou_veracidade" required><label class="form-check-label" for="veracidade">Declaro que as informações fornecidas são verdadeiras. <span class="obrigatorio">*</span></label><div class="invalid-feedback">É necessário confirmar esta declaração.</div></div>
+   <div class="form-check mb-3"><input class="form-check-input" type="checkbox" id="privacidade" name="ciencia_privacidade" required><label class="form-check-label" for="privacidade">Declaro que li e estou ciente do <a href="aviso-privacidade.html" target="_blank" rel="noopener noreferrer">Aviso de Privacidade e Tratamento de Dados (abrir documento)</a> referente à inscrição. <span class="obrigatorio">*</span></label><div class="invalid-feedback">É necessário registrar a ciência do aviso de privacidade.</div></div>
+   <p class="small text-secondary">* Campos obrigatórios. Consulte o Aviso de Privacidade no link acima antes de confirmar sua inscrição.</p>
+   <div class="d-flex gap-2 flex-wrap"><button type="submit" class="btn btn-primary px-4">Enviar inscrição</button><button type="submit" name="voltar" value="1" formaction="index.php" formnovalidate class="btn btn-outline-secondary">← Voltar</button></div>
+  </div></section>
+  <?php endif; ?>
+
+  <?php if ($etapa < 5): ?>
+  <div class="navegacao-etapas d-flex flex-wrap gap-2 mb-3">
+    <?php if ($etapa > 1): ?>
+      <button type="submit" name="voltar" value="1" formnovalidate class="btn btn-outline-secondary">← Voltar</button>
+    <?php endif; ?>
+    <button type="submit" name="continuar" value="1" class="btn btn-primary ms-auto">Continuar →</button>
+  </div>
+  <?php endif; ?>
+ </form>
+ <footer class="text-center py-3">Galera Tech • PHP, MySQL e Bootstrap</footer>
+</main>
+<?php if ($etapa === 2): ?>
+<script src="assets/consulta-cep.js?v=20261116-1" defer></script>
+<?php endif; ?>
+</body>
+</html>

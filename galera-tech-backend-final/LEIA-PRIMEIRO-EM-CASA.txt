@@ -1,0 +1,21 @@
+GALERA TECH - PROJETO COMPLETO PARA EDITAR EM CASA
+
+1. Extraia a pasta galera-tech-backend-final em um local no computador.
+2. Abra ESSA mesma pasta no VS Code.
+3. Para executar PHP + MySQL, coloque a pasta no diretório do servidor local
+   (por exemplo, C:\xampp\htdocs\ ou C:\laragon\www\).
+4. Inicie PHP/Apache e MySQL. Confira as configuracoes de banco no config.php.
+5. Se necessario, importe sql/galera_tech.sql no banco galera_tech.
+6. Abra o endereco HTTP do projeto no navegador, NAO use file:// nem Live Server.
+7. Atualize com Ctrl+F5 depois de mudar o CSS.
+
+EDITAR: 
+- index.php / etapas.php: formulario de 5 etapas, PHP.
+- assets/formulario.css: aparencia do formulario e botoes animados.
+- assets/img/: fundos de computador e celular.
+- sucesso.php + assets/sucesso.css: confirmacao de envio.
+- assets/style.css + admin/: estilos e paginas ORIGINAIS do painel.
+- salvar_inscricao.php: processamento e gravacao no MySQL (evite alterar sem backup).
+
+ATENCAO: nao use dados reais nos testes. Faca backup antes de mudar os arquivos.
+O envio real depende do seu MySQL local estar configurado.

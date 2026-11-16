@@ -1,0 +1,278 @@
+:root {
+    color-scheme: light;
+    --gt-fundo: #F8FBFC;
+    --gt-fundo-alt: #F0F8FA;
+    --gt-superficie: #FFFFFF;
+    --gt-painel: #ECF8FB;
+    --gt-campo: #FFFFFF;
+    --gt-texto: #253A46;
+    --gt-titulo: #18485F;
+    --gt-secundario: #607683;
+    --gt-borda: #D7E9EE;
+    --gt-borda-campo: #C9DBE2;
+    --gt-azul: #0098C8;
+    --gt-azul-hover: #007FA8;
+    --gt-ciano: #39B9D3;
+    --gt-amarelo: #F8B800;
+    --gt-trilha: #E4F0F4;
+    --gt-sombra: 0 16px 44px rgba(16, 77, 104, .085);
+    --gt-sombra-botao: 0 8px 20px rgba(0, 152, 200, .18);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { min-height: 100%; }
+body {
+    min-height: 100vh;
+    margin: 0;
+    color: var(--gt-texto);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background-color: var(--gt-fundo);
+    background-image:
+        radial-gradient(ellipse 40% 36% at 100% 0%, rgba(0, 152, 200, .075), transparent 78%),
+        radial-gradient(ellipse 30% 25% at 0% 100%, rgba(248, 184, 0, .055), transparent 82%),
+        linear-gradient(150deg, var(--gt-fundo), var(--gt-fundo-alt));
+    background-attachment: fixed;
+}
+.cabecalho {
+    padding: clamp(24px, 4.5vw, 45px) 0 22px;
+    background: transparent;
+    color: var(--gt-titulo);
+    text-align: center;
+}
+.cabecalho .container { max-width: 1040px !important; }
+.cabecalho .titulo-principal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0;
+    color: var(--gt-titulo);
+    font-size: clamp(1.7rem, 3vw, 2.45rem);
+    font-weight: 800;
+    letter-spacing: -.035em;
+    line-height: 1.18;
+}
+.cabecalho .icone-formatura {
+    width: 43px;
+    height: 43px;
+    flex-shrink: 0;
+    padding: 8px;
+    color: var(--gt-azul);
+    background: var(--gt-painel);
+    border: 1px solid var(--gt-borda);
+    border-bottom: 3px solid var(--gt-amarelo);
+    border-radius: 13px;
+}
+.cabecalho .subtitulo {
+    margin: 9px auto 0;
+    color: var(--gt-secundario);
+    font-size: 1.02rem;
+    line-height: 1.55;
+}
+main.container { max-width: 1040px !important; padding: 8px 16px 48px !important; }
+#formInscricao {
+    position: relative;
+    padding: clamp(22px, 3.5vw, 42px);
+    background: var(--gt-superficie);
+    border: 1px solid var(--gt-borda);
+    border-radius: 20px;
+    box-shadow: var(--gt-sombra);
+    overflow: hidden;
+}
+#formInscricao::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--gt-azul) 0%, var(--gt-ciano) 68%, var(--gt-amarelo) 100%);
+}
+.progresso-inscricao {
+    margin: 0 0 26px !important;
+    padding: 0 0 25px;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--gt-borda);
+    box-shadow: none;
+}
+.progresso-inscricao .d-flex { margin-bottom: 13px !important; }
+.progresso-inscricao strong { color: var(--gt-titulo); font-size: .97rem; font-weight: 780; }
+.progresso-inscricao span { color: var(--gt-azul); font-size: .9rem; font-weight: 720; }
+.progresso-inscricao .progress { height: 13px; overflow: hidden; background: var(--gt-trilha); border-radius: 999px; }
+.progresso-inscricao .progress-bar {
+    color: white;
+    background: linear-gradient(90deg, #0098C8, #24AFCD);
+    border-radius: 999px;
+    transition: width .3s ease;
+}
+.secao { margin: 0; border: 0; border-radius: 0; box-shadow: none; background: transparent; overflow: visible; }
+.secao .card-header {
+    padding: 15px 17px;
+    margin-bottom: 25px;
+    background: var(--gt-painel);
+    border: 1px solid var(--gt-borda);
+    border-left: 3px solid var(--gt-azul);
+    border-radius: 14px !important;
+}
+.secao .card-header h2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    color: var(--gt-titulo);
+    font-size: clamp(1.03rem, 1.7vw, 1.3rem);
+    font-weight: 760;
+    letter-spacing: -.02em;
+}
+.numero {
+    display: inline-grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    margin: 0;
+    background: var(--gt-azul);
+    color: white;
+    border-radius: 12px;
+    font-size: 1.07rem;
+    font-weight: 800;
+    box-shadow: 0 4px 12px rgba(0, 152, 200, .2);
+}
+.secao .card-body { padding: 0; }
+.secao .row { --bs-gutter-x: 1.3rem; --bs-gutter-y: 1.25rem; }
+.form-label { margin-bottom: 7px; color: var(--gt-titulo); font-size: .91rem; font-weight: 690; }
+.form-text, .text-secondary, .small.text-secondary { color: var(--gt-secundario) !important; }
+.obrigatorio { color: #C5444B; font-weight: 780; }
+.form-control, .form-select {
+    width: 100%;
+    min-height: 49px;
+    padding: 11px 13px;
+    border: 1.5px solid var(--gt-borda-campo);
+    border-radius: 10px;
+    background-color: var(--gt-campo);
+    color: var(--gt-texto);
+    font-size: 16px;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+.form-control::placeholder { color: var(--gt-secundario); opacity: .85; }
+.form-control:focus, .form-select:focus {
+    color: var(--gt-texto);
+    background-color: var(--gt-campo);
+    border-color: var(--gt-azul);
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(0, 152, 200, .16);
+}
+.form-check-label { color: var(--gt-texto); line-height: 1.5; }
+.form-check-input { background-color: var(--gt-campo); border-color: var(--gt-borda-campo); }
+.form-check-input:checked { background-color: var(--gt-azul); border-color: var(--gt-azul); }
+.navegacao-etapas, .secao .card-body > .d-flex.gap-2 {
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px solid var(--gt-borda);
+}
+.navegacao-etapas { margin-bottom: 0 !important; }
+form .btn {
+    position: relative;
+    min-height: 49px;
+    padding: 11px 27px;
+    border-radius: 10px;
+    font-size: .97rem;
+    font-weight: 720;
+    transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease, border-color .2s ease;
+}
+form .btn-primary {
+    background: var(--gt-azul);
+    color: white;
+    border-color: var(--gt-azul);
+    box-shadow: var(--gt-sombra-botao);
+}
+form .btn-primary:hover, form .btn-primary:focus-visible {
+    color: white;
+    background: var(--gt-azul-hover);
+    border-color: var(--gt-azul-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 13px 26px rgba(0, 152, 200, .24);
+}
+form .btn-outline-secondary { color: var(--gt-titulo); background: var(--gt-superficie); border-color: var(--gt-borda-campo); }
+form .btn-outline-secondary:hover { color: var(--gt-titulo); background: var(--gt-painel); border-color: var(--gt-azul); transform: translateY(-2px); }
+form .btn:active { transform: translateY(1px) scale(.987); }
+form .btn:focus-visible { outline: 3px solid var(--gt-amarelo); outline-offset: 3px; }
+.alert { border-radius: 12px; line-height: 1.55; }
+.alert-primary, .alert-info, .alert-light { background: var(--gt-painel); border-color: var(--gt-borda); color: var(--gt-titulo); }
+.alert-danger { background: #FFF0F0; border-color: #F3C9CC; color: #9F303A; }
+a { color: var(--gt-azul-hover); }
+a:hover { color: var(--gt-titulo); }
+.informacoes-inscricao {
+    margin: 18px auto 0;
+    overflow: hidden;
+    background: var(--gt-superficie);
+    color: var(--gt-texto);
+    border: 1px solid var(--gt-borda);
+    border-radius: 13px;
+}
+.informacoes-inscricao summary { padding: 14px 18px; cursor: pointer; font-size: .9rem; font-weight: 650; }
+.informacoes-inscricao summary:hover { background: var(--gt-painel); }
+.informacoes-inscricao .informacoes-conteudo { padding: 0 16px 16px; }
+.informacoes-inscricao .alert { margin: 8px 0; }
+.cep-status { margin-top: 7px; font-size: .8rem; line-height: 1.4; color: var(--gt-secundario); }
+.cep-status[data-status='loading'] { color: var(--gt-azul); }
+.cep-status[data-status='success'] { color: #137460; }
+.cep-status[data-status='warning'] { color: #94700A; }
+footer { color: var(--gt-secundario); font-size: .85rem; }
+@media (max-width: 767px) {
+    body { background-attachment: scroll; }
+    .cabecalho { padding: 26px 0 12px; }
+    .cabecalho .container { padding-inline: 17px; }
+    .cabecalho .titulo-principal { font-size: clamp(1.44rem, 6vw, 1.95rem); }
+    .cabecalho .icone-formatura { width: 37px; height: 37px; padding: 7px; }
+    .cabecalho .subtitulo { margin-top: 9px; font-size: .91rem; }
+    main.container { padding: 10px 12px 35px !important; }
+    #formInscricao { padding: 24px 17px 20px; border-radius: 18px; }
+    .progresso-inscricao { padding-bottom: 21px; margin-bottom: 21px !important; }
+    .progresso-inscricao strong, .progresso-inscricao span { font-size: .84rem; }
+    .secao .card-header { padding: 12px; margin-bottom: 21px; }
+    .secao .card-header h2 { font-size: 1rem; gap: 9px; }
+    .numero { width: 35px; height: 35px; font-size: .98rem; }
+    .secao .row { --bs-gutter-x: 1rem; --bs-gutter-y: 1rem; }
+    .navegacao-etapas, .secao .card-body > .d-flex.gap-2 { margin-top: 23px; padding-top: 18px; }
+    .navegacao-etapas .btn { flex: 1 1 auto; }
+    form .btn { min-height: 50px; }
+    footer { font-size: .78rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+    form .btn:hover, form .btn:active { transform: none !important; }
+}
+
+@media (max-width: 767px) {
+    .cabecalho { padding: 21px 0 13px; }
+    .cabecalho .titulo-principal { gap: 8px; font-size: clamp(1.38rem, 5.4vw, 1.72rem); }
+    .cabecalho .subtitulo { font-size: .91rem; max-width: 34ch; }
+    main.container { padding: 8px 10px 28px !important; }
+    #formInscricao { border-radius: 17px; padding: 20px 15px 17px; }
+    .progresso-inscricao { margin-bottom: 19px !important; padding-bottom: 17px; }
+    .secao .card-header { padding: 12px; margin-bottom: 18px; }
+    .secao .row { --bs-gutter-y: 1.05rem; --bs-gutter-x: .85rem; }
+    .form-label { font-size: .92rem; line-height: 1.45; margin-bottom: 7px; }
+    .form-control, .form-select { min-height: 52px; padding: 12px 13px; font-size: 16px; border-radius: 11px; }
+    .form-check { padding-left: 1.8rem; margin-bottom: 19px !important; }
+    .form-check-input { width: 1.24rem; height: 1.24rem; margin-left: -1.8rem; margin-top: .18rem; }
+    .form-check-label { font-size: .95rem; line-height: 1.55; }
+    .navegacao-etapas, .secao .card-body > .d-flex.gap-2 { display: flex !important; flex-direction: column-reverse; gap: 10px !important; align-items: stretch; }
+    .navegacao-etapas .btn, .secao .card-body > .d-flex.gap-2 .btn { width: 100%; margin-left: 0 !important; flex: none; }
+    form .btn { min-height: 54px; padding: 13px 18px; font-size: 1rem; }
+    .informacoes-inscricao summary { padding: 15px; }
+    .alert { font-size: .92rem; }
+}
+@media (max-width: 360px) {
+    main.container { padding-inline: 8px !important; }
+    #formInscricao { padding-inline: 12px; }
+    .secao .card-header h2 { font-size: .95rem; }
+}
+@media (min-width: 768px) {
+    #formInscricao { padding: clamp(30px, 3.4vw, 44px); }
+    .cabecalho { padding-top: 42px; }
+    main.container { max-width: 970px !important; }
+}
